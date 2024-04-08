@@ -1,29 +1,24 @@
 const sendInput = document.querySelector('#input');
-const listContainer = document.querySelector('.groceries');
+const listContainer = document.querySelector('#items');
 
 
 sendInput.addEventListener('keydown', function(event) {
-    const listText = sendInput.value;
     if (event.key == 'Enter') {
+        const listText = sendInput.value;
 
-    }
+        const listItem = document.createElement('div');
+        listItem.classList.add('listItems');
+        listItem.textContent = listText;
 
-    const listItems = document.querySelectorAll('.items');
-    listItems.textContent = listText;
-    /* Новые элементы должны добавляться в список по нажатию на Enter */
-
-    if (listText != '')
-        listContainer.append(listItems);
-    /* Пустые элементы не должны добавляться */
-
-    for (let item of listItems) {
-        item.addEventListener('click', function() {
-            item.classList.toggle('done');
+        listItem.addEventListener('click', function() {
+            listItem.classList.toggle('done');
         })
+
+
+        if (listText != '')
+            listContainer.append(listItem);
+
+        sendInput.value = '';
     }
-    /* Если кликнуть на элемент списка, он зачеркивается */
 
-    /* Если кликнуть повторно уже на зачеркнутый, он снова становится обычным */
-
-    sendInput.value = ''; /* Очищать input после добавления нового элемента в список */
 })
